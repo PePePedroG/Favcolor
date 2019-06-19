@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Favcolor</title>
+    <!-- Icon -->
+    <link rel="icon" href="./gallery/icon.png">
+    <!-- Css -->
+    <link rel="stylesheet" href="main.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:500:bold|Permanent+Marker&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <nav class='navbar'>
+        <div class="container">
+            <h2 class='navbar__logo'>Favcolor</h2>
+        </div>
+    </nav>
+    <main class='mainContent'>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <h1 class='mainContent__header'>Color generator</h1>
+                    <p class='mainContent__paragraph text'>
+                        Just a simple color generator with few features like:
+                        <ul class='mainContent__list text'>
+                            <li class='mainContent__item'>- generate random color</li>
+                            <li class='mainContent__item'>- see it’s hex code</li>
+                            <li class='mainContent__item'>- add new color to the list</li>
+                            <li class='mainContent__item'>- delete specific color from the list</li>
+                        </ul>
+                    </p>
+                </div>
+                <div>
+                    <h2 class='mainContent__hexCode'>#0A89FF</h2>
+                    <button class="mainContent__btn btn-primary text">Generate</button>
+                    <button class="mainContent__btn btn-secondary text">Add</button>
+                    <div class="mainContent__table">
+                        <div class="mainContent__color mainContent__color--grid">
+                            <div class="mainContent__circle"></div>
+                            <p class='mainContent__title text mainContent__color--grid__span-col-4'>#0A89FF</p>
+                            <button class="mainContent__btn btn-tertiary"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class='footerContent'>
+        <p>Created by Piotr Gasiorek</p>
+    </footer>
+    <script src='./main.js'></script>
+</body>
+</html>
