@@ -1,13 +1,24 @@
 // Default data
 const hex = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'];
-let savedColors = ['#0A89FF'];
 let newColor = '#0A89FF';
-deleteColor(); 
+// Download savedColors from local storage
+let savedColors = JSON.parse(localStorage.getItem("savedColors"))
+// Load savedColors
+AppOutput();
+
+updateDelBtns(); 
+
+// Selectors
 const btnPrimary = document.querySelector('.btn-primary');
-const btnSecondary = document.querySelector('.btn-secondary');
+const btnSecondary = document.querySelector('.btn-secondary')
+// update local storage 
+function updateLocalStorage(){
+    localStorage.setItem("savedColors", JSON.stringify(savedColors));
+}
 
 // Generate color
 btnPrimary.addEventListener('click', function(){
+
     newColor = '#';
 
     for(let i = 0; i < 6; i++){
@@ -15,8 +26,13 @@ btnPrimary.addEventListener('click', function(){
       newColor += hex[randomSymbol];
     }
 
-    // New styles
+    changeWebsitesColors();
 
+});
+
+// Change websites colors
+function changeWebsitesColors() {
+    
     // hexCode
     document.querySelector('.app__hexCode').textContent = newColor;
     document.querySelector('.app__hexCode').style.color = newColor;
@@ -34,11 +50,9 @@ btnPrimary.addEventListener('click', function(){
     // btn secondary
     btnSecondary.style.color = newColor;
     btnSecondary.style.borderColor = newColor;
+}
 
-    
-});
-
-// Save newColor
+// Add newColor
 btnSecondary.addEventListener('click', function(){
     
     // Check if this color is already saved 
@@ -48,27 +62,29 @@ btnSecondary.addEventListener('click', function(){
 
     else{
         // Save newColor
-        savedColors.push(newColor)
-        // Add newColor to the table
-        document.querySelector('.app__table').innerHTML = 
-            `
-                <div class="app__color app__color--grid">
-                    <div class="app__circle" style='background:${newColor}'></div>
-                    <p class='app__title text app__color--grid__span-col-4'>${newColor}</p>
-                    <button class="app__btn btn-tertiary"></button>
-                </div>
-            `
-            + document.querySelector('.app__table').innerHTML;
+        savedColors.unshift(newColor);
+        // Update table
+        AppOutput();
         
-        deleteColor();
-    }
-
-        
-        
+        updateDelBtns();
+        updateLocalStorage();
+    }  
 });
 
-// Delete color function
-function deleteColor() {
+function AppOutput() {
+    // Insert savedColors on the website
+    document.querySelector('.app__table').innerHTML = savedColors.map(color => {
+        return (`
+            <div class="app__color app__color--grid">
+                <div class="app__circle" style='background:${color}'></div>
+                <p class='app__title text app__color--grid__span-col-4'>${color}</p>
+                <button class="app__btn btn-tertiary"></button>
+            </div>
+        `)
+    }).join('');
+}
+
+function updateDelBtns() {
     document.querySelectorAll('.btn-tertiary').forEach(
         (element) => {element.addEventListener('click', 
             function(element) {
@@ -76,6 +92,7 @@ function deleteColor() {
                     return color !== this.parentNode.children[1].textContent
                 });
                 this.parentNode.style.display = 'none';
+                updateLocalStorage();
             });
     });
 }
