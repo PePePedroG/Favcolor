@@ -7,7 +7,7 @@ const btnPrimary = document.querySelector('.btn-primary');
 const btnSecondary = document.querySelector('.btn-secondary');
 
 // Generate color
-document.querySelector('.btn-primary').addEventListener('click', function(){
+btnPrimary.addEventListener('click', function(){
     newColor = '#';
 
     for(let i = 0; i < 6; i++){
@@ -18,13 +18,13 @@ document.querySelector('.btn-primary').addEventListener('click', function(){
     // New styles
 
     // hexCode
-    document.querySelector('.mainContent__hexCode').textContent = newColor;
-    document.querySelector('.mainContent__hexCode').style.color = newColor;
+    document.querySelector('.app__hexCode').textContent = newColor;
+    document.querySelector('.app__hexCode').style.color = newColor;
 
     // logo & header & footer
     document.querySelector('.navbar__logo').style.color = newColor;
-    document.querySelector('.mainContent__header').style.color = newColor;
-    document.querySelector('.footerContent').style.background = newColor;
+    document.querySelector('.description__header').style.color = newColor;
+    document.querySelector('.footer').style.background = newColor;
 
     // btn primary
     btnPrimary.style.background = newColor;
@@ -39,7 +39,7 @@ document.querySelector('.btn-primary').addEventListener('click', function(){
 });
 
 // Save newColor
-document.querySelector('.btn-secondary').addEventListener('click', function(){
+btnSecondary.addEventListener('click', function(){
     
     // Check if this color is already saved 
     if(savedColors.includes(newColor)){
@@ -50,15 +50,15 @@ document.querySelector('.btn-secondary').addEventListener('click', function(){
         // Save newColor
         savedColors.push(newColor)
         // Add newColor to the table
-        document.querySelector('.mainContent__table').innerHTML = 
+        document.querySelector('.app__table').innerHTML = 
             `
-                <div class="mainContent__color mainContent__color--grid">
-                    <div class="mainContent__circle" style='background:${newColor}'></div>
-                    <p class='mainContent__title text mainContent__color--grid__span-col-4'>${newColor}</p>
-                    <button class="mainContent__btn btn-tertiary"></button>
+                <div class="app__color app__color--grid">
+                    <div class="app__circle" style='background:${newColor}'></div>
+                    <p class='app__title text app__color--grid__span-col-4'>${newColor}</p>
+                    <button class="app__btn btn-tertiary"></button>
                 </div>
             `
-            + document.querySelector('.mainContent__table').innerHTML;
+            + document.querySelector('.app__table').innerHTML;
         
         deleteColor();
     }
